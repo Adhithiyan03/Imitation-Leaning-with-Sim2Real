@@ -1,0 +1,52 @@
+<mujoco model="ur10e scene">
+    <include file="ur10e_gripper2.xml"/>
+    <!--    <include file="ur10e.xml"/>-->
+
+    <statistic center="0.4 0 0.4" extent="1"/>
+
+    <option impratio="10"/>
+
+    <visual>
+        <headlight diffuse="0.6 0.6 0.6" ambient="0.1 0.1 0.1" specular="0 0 0"/>
+        <rgba haze="0.15 0.25 0.35 1"/>
+        <global azimuth="120" elevation="-20"/>
+    </visual>
+
+    <asset>
+        <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072"/>
+        <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3"
+                 markrgb="0.8 0.8 0.8" width="300" height="300"/>
+        <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+    </asset>
+
+    <worldbody>
+        <light pos="0 0 1.5" dir="0 0 -1" directional="true"/>
+        <geom name="floor" size="0 0 0.05" type="plane" solimp="2 1 0.01" solref="0.01 1" conaffinity="1" contype="1"
+              material="groundplane"/>
+
+        <body name="left_cylinder" pos="0.75 0.35 0.15">
+            <geom group="1" name="left_cylinder" size="0.075 0.15" type="cylinder" solimp="2 1 0.01" solref="0.01 1"
+                  conaffinity="1" contype="1" rgba="0.6 0.0 0.3 1.0"/>
+        </body>
+
+        <body name="right_cylinder" pos="0.75 -0.15 0.15">
+            <geom group="1" name="right_cylinder" size="0.075 0.15" type="cylinder" solimp="2 1 0.01" solref="0.01 1"
+                  conaffinity="1" contype="1" rgba="0.3 0.0 0.6 1.0"/>
+        </body>
+
+<!--        <camera name="left_pillar" pos="-0.5 0.2 0.6" fovy="78" mode="targetbody" target="left_cylinder"/>-->
+<!--        <camera name="right_pillar" pos="0.5 0.2 0.6" fovy="78" mode="targetbody" target="left_cylinder"/>-->
+        <camera name="top" pos="0.562 0.006 2.504" xyaxes="-0.013 -1.000 -0.000 0.999 -0.013 0.031"/>
+<!--        <camera name="top" pos="0 0.6 0.8" fovy="78" mode="targetbody" target="left_cylinder"/>-->
+        <camera name="angle" pos="1.693 0.124 1.256" xyaxes="-0.043 0.999 0.000 -0.558 -0.024 0.830"/>
+<!--        <camera name="angle" pos="0 0 0.6" fovy="78" mode="targetbody" target="left_cylinder"/>-->
+        <camera name="front_close" pos="0.100 0.193 0.358" fovy="78" mode="targetbody" target="gripper_link"/>
+    </worldbody>
+
+    <keyframe>
+        <key qpos="-1.57081013e+00 -1.56278922e+00  1.57857679e+00 -1.57009754e+00
+ -1.57077069e+00 -1.59539184e-06  3.60000000e-02 -3.60000000e-02"
+             ctrl="-1.57081013e+00 -1.56278922e+00  1.57857679e+00 -1.57009754e+00
+ -1.57077069e+00 -1.59539184e-06  3.60000000e-02 -3.60000000e-02"/>
+    </keyframe>
+</mujoco>

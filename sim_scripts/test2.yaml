@@ -1,0 +1,371 @@
+# Mujoco XML Stuff
+env_ee_xml: './assets/bimanual_viperx_ee_tape_free.xml'
+env_xml: './assets/bimanual_viperx_tape_free.xml'
+
+includes:
+  - './door_latch/door_latch_dependencies.xml'
+
+# Configurations to use for this file
+temp_ee_xml: './assets/__temp_ee__.xml'
+temp_xml: './assets/__temp__.xml'
+
+trajectories:
+  - left_points
+  - right_points
+mocap:
+  - mocap_left
+  - mocap_right
+
+gripper:
+  - offset:
+      - 0.0
+      - 0.0
+      - 0.0
+    euler:
+      - 0
+      - 0
+      - 0
+  - offset:
+      - 0.15
+      - 0.0
+      - 0.0
+    euler:
+      - 0
+      - 0
+      - 0
+
+# Global points shared between XML and the trajectory
+points:
+  - name: start_pos
+    pos:
+      - -0.1
+      - 0.45
+      - 0.0075
+    orientation_type: global
+    euler:
+      - 0
+      - 0
+      - 0
+  - name: end_pos
+    pos:
+      - 0.1
+      - 0.55
+      - 0.0075
+  - name: lift_pt
+    pos:
+      - -0.05
+      - 0.55
+      - 0.1
+
+# Parts to be added the XML
+parts:
+  - name: door_latch_medium_bumper
+    pos: start_pos
+    euler:
+      - 0
+      - 0
+      - 0
+
+# Trajectory
+left_points:
+  # Starting position
+  - t: 25
+    pos_type: relative
+    pos_relative: mocap_left
+    pos:
+      - 0.0
+      - 0.0
+      - 0.0
+    orientation_type: relative
+    orientation_relative: mocap_left
+    euler:
+      - 0
+      - 0
+      - 0
+    gripper: 0.0
+  # Over the medium bumper
+  - dt: 150
+    pos_type: relative
+    pos_relative: start_pos
+    pos:
+      - 0.0
+      - 0.0
+      - 0.2
+    orientation_type: relative
+    orientation_relative: mocap_left
+    euler:
+      - 0
+      - 0
+      - 0
+    gripper: 1.0
+  # Lower the gripper
+  - dt: 150
+    pos_type: relative
+    pos_relative: start_pos
+    pos:
+      - 0.0
+      - 0.0
+      - -0.01
+    orientation_type: relative
+    orientation_relative: mocap_left
+    euler:
+      - 0
+      - 45
+      - 0
+    gripper: 1.0
+  # Close the gripper
+  - dt: 150
+    pos_type: relative
+    pos_relative: start_pos
+    pos:
+      - 0.0
+      - 0.0
+      - -0.01
+    orientation_type: relative
+    orientation_relative: mocap_left
+    euler:
+      - 0
+      - 45
+      - 0
+    gripper: 0.0
+  # Lift the medium bumper up to the medium point
+  - dt: 100
+    pos_type: relative
+    pos_relative: lift_pt
+    pos:
+      - 0.0
+      - 0.0
+      - 0.0
+    orientation_type: relative
+    orientation_relative: mocap_left
+    euler:
+      - 0
+      - 45
+      - 0
+    gripper: 0.0
+  # Move the medium bumper to the end position
+  - dt: 150
+    pos_type: relative
+    pos_relative: end_pos
+    pos:
+      - 0.0
+      - 0.0
+      - 0.05
+    orientation_type: relative
+    orientation_relative: mocap_left
+    euler:
+      - 0
+      - 45
+      - 0
+    gripper: 0.0
+  # Lower the medium bumper
+  - dt: 100
+    pos_type: relative
+    pos_relative: end_pos
+    pos:
+      - 0.0
+      - 0.0
+      - 0.0
+    orientation_type: relative
+    orientation_relative: mocap_left
+    euler:
+      - 0
+      - 45
+      - 0
+    gripper: 0.0
+  # Open the gripper to drop the medium bumper
+  - dt: 100
+    pos_type: relative
+    pos_relative: end_pos
+    pos:
+      - 0.0
+      - 0.0
+      - 0.0
+    orientation_type: relative
+    orientation_relative: mocap_left
+    euler:
+      - 0
+      - 45
+      - 0
+    gripper: 1.0
+  # Move gripper back to starting position
+  - dt: 150
+    pos_type: global
+    pos:
+      - 0.0
+      - 0.55
+      - 0.1
+    orientation_type: relative
+    orientation_relative: mocap_left
+    euler:
+      - 0
+      - 30
+      - 0
+    gripper: 1.0
+  # Back to starting point slowly
+  - dt: 400
+    pos_type: relative
+    pos_relative: mocap_left
+    pos:
+      - 0.0
+      - 0.0
+      - 0.0
+    orientation_type: relative
+    orientation_relative: mocap_left
+    euler:
+      - 0
+      - 0
+      - 0
+    gripper: 0.0
+
+right_points:
+  # Rest in the start position
+  - t: 2220
+    pos_type: relative
+    pos_relative: mocap_right
+    pos:
+      - 0.0
+      - 0.0
+      - 0.0
+    orientation_type: relative
+    orientation_relative: mocap_right
+    euler:
+      - 0
+      - 0
+      - 0
+    gripper: 0.0
+  # Move to above the medium bumper
+  - dt: 300
+    pos_type: relative
+    pos_relative: end_pos
+    pos:
+      - -0.01
+      - 0.0
+      - 0.05
+    orientation_type: relative
+    orientation_relative: mocap_right
+    euler:
+      - 0
+      - -45
+      - 0
+    gripper: 1.0
+  # Lower the gripper
+  - dt: 200
+    pos_type: relative
+    pos_relative: end_pos
+    pos:
+      - -0.01
+      - 0.0
+      - 0.0
+    orientation_type: relative
+    orientation_relative: mocap_right
+    euler:
+      - 0
+      - -45
+      - 0
+    gripper: 1.0
+  # Close the gripper
+  - dt: 300
+    pos_type: relative
+    pos_relative: end_pos
+    pos:
+      - -0.01
+      - 0.0
+      - 0.0
+    orientation_type: relative
+    orientation_relative: mocap_right
+    euler:
+      - 0
+      - -45
+      - 0
+    gripper: 0.0
+  # Lift the medium bumper up to the medium point
+  - dt: 300
+    pos_type: relative
+    pos_relative: lift_pt
+    pos:
+      - 0.0
+      - 0.0
+      - 0.0
+    orientation_type: relative
+    orientation_relative: mocap_right
+    euler:
+      - 0
+      - -45
+      - 0
+    gripper: 0.0
+  # Move the medium bumper to the end position
+  - dt: 250
+    pos_type: relative
+    pos_relative: start_pos
+    pos:
+      - 0.0
+      - 0.0
+      - 0.05
+    orientation_type: relative
+    orientation_relative: mocap_right
+    euler:
+      - 0
+      - -45
+      - 0
+    gripper: 0.0
+  # Lower the medium bumper
+  - dt: 200
+    pos_type: relative
+    pos_relative: start_pos
+    pos:
+      - 0.0
+      - 0.0
+      - 0.0
+    orientation_type: relative
+    orientation_relative: mocap_right
+    euler:
+      - 0
+      - -45
+      - 0
+    gripper: 0.0
+    # Open the gripper to drop the medium bumper
+  - dt: 200
+    pos_type: relative
+    pos_relative: start_pos
+    pos:
+      - 0.0
+      - 0.0
+      - 0.0
+    orientation_type: relative
+    orientation_relative: mocap_right
+    euler:
+      - 0
+      - -45
+      - 0
+    gripper: 1.0
+    # Move the gripper back up
+  - dt: 250
+    pos_type: relative
+    pos_relative: start_pos
+    pos:
+      - 0.0
+      - 0.0
+      - 0.05
+    orientation_type: relative
+    orientation_relative: mocap_right
+    euler:
+      - 0
+      - -45
+      - 0
+    gripper: 1.0
+    # Back to starting point slowly
+  - dt: 600
+    pos_type: relative
+    pos_relative: mocap_right
+    pos:
+      - 0.0
+      - 0.0
+      - 0.0
+    orientation_type: relative
+    orientation_relative: mocap_right
+    euler:
+      - 0
+      - 0
+      - 0
+    gripper: 0.0

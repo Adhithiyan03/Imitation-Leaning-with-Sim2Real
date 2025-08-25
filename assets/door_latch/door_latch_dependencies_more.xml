@@ -1,0 +1,14 @@
+<mujocoinclude>
+    <compiler angle="radian" inertiafromgeom="auto" inertiagrouprange="4 5"/>
+    <asset>
+<!--        <mesh name="door_latch_housing" file="door_latch/3031749_HOUSING.stl" scale="0.002 0.002 0.002"/>-->
+        <mesh name="door_latch_housing" file="door_latch/housing_convex.stl" scale="0.002 0.002 0.002"/>
+        <mesh name="door_latch_long_bumper" file="door_latch/3035571_LONG_BUMPER.stl" scale="0.002 0.002 0.002"/>
+        <mesh name="door_latch_switch_cam" file="door_latch/3031075_SWITCH_CAM.stl" scale="0.002 0.002 0.002"/>
+        <mesh name="door_latch_straight_spring" file="door_latch/3031068_STRAIGHT_SPRING.stl"
+              scale="0.002 0.002 0.002"/>
+        <mesh name="door_latch_small_bumper" file="door_latch/3031061_SMALL_BUMPER_B.stl" scale="0.002 0.002 0.002"/>
+        <mesh name="door_latch_medium_bumper" file="door_latch/3031065_MEDIUM_BUMPER_B.stl" scale="0.002 0.002 0.002"/>
+
+    </asset>
+</mujocoinclude>

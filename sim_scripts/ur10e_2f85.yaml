@@ -1,0 +1,187 @@
+# Mujoco XML Stuff
+env_ee_xml: './assets/scene_ur10e_2f85_ee.xml'
+env_xml: './assets/scene_ur10e_2f85.xml'
+
+#includes:
+#  - './door_latch/door_latch_dependencies_ur10e.xml'
+
+# Configurations to use for this file
+temp_ee_xml: './assets/__temp_ee__.xml'
+temp_xml: './assets/__temp__.xml'
+
+# Settings for the simulation for the XML file
+impratio: 100
+
+# Settings for the simulation for runtime
+trajectories:
+  - tj_points
+mocap:
+  - mocap_left
+# Which indexes to use for the control of the end effector in the ctrl array
+ctrl:
+  - 6
+gripper_open:
+  - 100
+gripper_close:
+  - 255
+
+# Points
+points:
+  - name: start_pos
+    pos:
+      - 0.75
+      - 0.35
+      - 0.30
+  - name: end_pos
+    pos:
+      - 0.75
+      - -0.15
+      - 0.30
+  - name: lift_pt
+    pos:
+      - -0.05
+      - 0.55
+      - 0.1
+
+# Parts to be added the XML
+parts:
+  - name: door_latch_medium_bumper
+    pos: start_pos
+    euler:
+      - 0
+      - 0
+      - 0
+    color: '0.8 0.7 0 1'
+    friction: '4 0.1 0.01'
+
+# Rewards
+
+# Robot arm
+tj_points:
+  # On top of the object
+  - t: 250
+    pos_type: relative
+    pos_relative: start_pos
+    pos:
+      - 0.0
+      - 0.0
+      - 0.1
+    orientation_type: global
+    euler:
+      - 0
+      - 180
+      - -90
+    gripper: 1.0
+  # Lower down to the object
+  - dt: 250
+    pos_type: relative
+    pos_relative: start_pos
+    pos:
+      - -0.005
+      - 0.01
+      - 0.01
+    orientation_type: global
+    euler:
+      - 0
+      - 180
+      - -90
+    gripper: 1.0
+  # Close the gripper
+  - dt: 350
+    pos_type: relative
+    pos_relative: start_pos
+    pos:
+      - -0.005
+      - 0.01
+      - 0.01
+    orientation_type: global
+    euler:
+      - 0
+      - 180
+      - -90
+    gripper: 0.3
+  # Lift it off the pedestal
+  - dt: 300
+    pos_type: relative
+    pos_relative: start_pos
+    pos:
+      - -0.005
+      - 0.01
+      - 0.1
+    orientation_type: global
+    euler:
+      - 0
+      - 180
+      - -90
+    gripper: 0.3
+  # Move to the end position pedestal
+  - dt: 300
+    pos_type: relative
+    pos_relative: end_pos
+    pos:
+      - 0.0
+      - 0.0
+      - 0.1
+    orientation_type: global
+    euler:
+      - 0
+      - 180
+      - -90
+    gripper: 0.3
+    # Lower down to the pedestal
+  - dt: 200
+    pos_type: relative
+    pos_relative: end_pos
+    pos:
+      - 0.0
+      - 0.0
+      - 0.004
+    orientation_type: global
+    euler:
+      - 0
+      - 180
+      - -90
+    gripper: 0.3
+    # Open the gripper
+  - dt: 200
+    pos_type: relative
+    pos_relative: end_pos
+    pos:
+      - 0.0
+      - 0.0
+      - 0.004
+    orientation_type: global
+    euler:
+      - 0
+      - 180
+      - -90
+    gripper: 1.0
+  # Move back up
+  - dt: 200
+    pos_type: relative
+    pos_relative: end_pos
+    pos:
+      - 0.0
+      - 0.0
+      - 0.1
+    orientation_type: global
+    euler:
+      - 0
+      - 180
+      - -90
+    gripper: 1.0
+  # MOve to the starting point
+  - dt: 400
+    pos_type: relative
+    pos_relative: mocap_left
+    pos:
+      - 0.0
+      - 0.0
+      - 0.00
+    orientation_type: relative
+    orientation_relative: mocap_left
+    euler:
+      - 0
+      - 0
+      - 0
+    gripper: 0.3

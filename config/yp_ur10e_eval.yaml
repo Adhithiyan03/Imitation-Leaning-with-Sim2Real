@@ -1,0 +1,37 @@
+# Parameters to generate dataset
+#
+# Previous command line args
+# --task_name yaml_policy --sim_script sim_scripts/ur10e_med_bumper_move.yaml --dataset_dir dataset --num_episodes 50 --gzip 9
+task_name: yaml_policy
+sim_script: sim_scripts/ur10e_med_bumper_move.yaml
+dataset_dir: dataset-ur10e-sim
+num_episodes: 50
+gzip: 5
+
+# Task configs from constants.py
+# num_episodes: 50   # Already in the generate dataset section
+episode_len: 2000
+camera_names: ['top_RGBD', 'angle_RGBD', 'vis_RGBD']
+
+# Parameters for imitate episodes
+#
+# Previous command line args
+# --task_name yaml_policy --ckpt_dir ckpt --policy_class ACT --kl_weight 10 --chunk_size 100 --hidden_dim 512 --batch_size 8 --dim_feedforward 3200 --num_epochs 2000  --lr 1e-5 --seed 0 --state_dim=7
+eval: True
+onscreen_render: True
+ckpt_dir: D:\models\depth_ur10e_sim
+# ckpt_file: policy_epoch_74700_seed_0.ckpt
+policy_class: ACT
+# task_name: yaml_policy       # Already in the generate dataset section
+batch_size: 8
+seed: 0
+num_epochs: 2000
+lr: 1.e-5
+kl_weight: 10
+chunk_size: 100
+hidden_dim: 512
+dim_feedforward: 3200
+temporal_agg: False
+state_dim: 7
+force_torque: False
+resume: True

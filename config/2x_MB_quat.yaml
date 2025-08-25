@@ -1,0 +1,40 @@
+# Parameters to generate dataset
+#
+# Previous command line args
+# --task_name yaml_policy --sim_script sim_scripts/ur10e_med_bumper_move.yaml --dataset_dir dataset --num_episodes 50 --gzip 9
+task_name: 2x_MB
+dataset_dir: D:\data\2x_MB_quat
+num_episodes: 2
+gzip: 5
+
+# Task configs from constants.py
+# num_episodes: 50   # Already in the generate dataset section
+episode_len: 2000
+camera_names: [ 'cam_left', 'cam_right', 'cam_top_RGBD', 'cam_wrist', 'cam_wrist_RGBD' ]
+
+# Parameters for imitate episodes
+#
+# Previous command line args
+# --task_name yaml_policy --ckpt_dir ckpt --policy_class ACT --kl_weight 10 --chunk_size 100 --hidden_dim 512 --batch_size 8 --dim_feedforward 3200 --num_epochs 2000  --lr 1e-5 --seed 0 --state_dim=7
+eval: False
+onscreen_render: False
+ckpt_dir: ckpt-PiH_Depth_quat
+ckpt_freq: 1000
+policy_class: ACT
+# task_name: yaml_policy       # Already in the generate dataset section
+batch_size: 8
+seed: 0
+num_epochs: 200000
+lr: 1.e-5
+kl_weight: 10
+chunk_size: 100
+hidden_dim: 512
+dim_feedforward: 3200
+temporal_agg: False
+state_dim: 8
+
+ignore_norm: [ 3, 4, 5, 6 ] # Ignore normalization for quaternion values. Index starts at 0.
+
+# Parameters for training optimizations
+resume: False
+load_images_to_memory: True # Load all the images to memory to avoid disk reads for images

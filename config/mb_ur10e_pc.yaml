@@ -1,0 +1,47 @@
+# Parameters to generate dataset
+#
+# Previous command line args
+# --task_name yaml_policy --sim_script sim_scripts/ur10e_med_bumper_move.yaml --dataset_dir dataset --num_episodes 50 --gzip 9
+task_name: yaml_policy
+sim_script: sim_scripts/ur10e_med_bumper_move.yaml
+dataset_dir: D:\Share\PC-Only
+num_episodes: 5
+gzip: 5
+
+# Task configs from constants.py
+# num_episodes: 50   # Already in the generate dataset section
+episode_len: 200000
+use_cameras: False # Only point-cloud. No camera inputs.
+camera_names: ['top', 'angle', 'vis'] 
+
+# Point cloud configs
+use_point_clouds: True
+point_clouds: ['top', 'angle', 'front_close']
+max_point_cloud_size: 307200
+
+# Parameters for if we want to use pos or qpos
+use_pos: True
+ee_body_name: gripper_center_body
+
+# Parameters for imitate episodes
+#
+# Previous command line args
+# --task_name yaml_policy --ckpt_dir ckpt --policy_class ACT --kl_weight 10 --chunk_size 100 --hidden_dim 512 --batch_size 8 --dim_feedforward 3200 --num_epochs 2000  --lr 1e-5 --seed 0 --state_dim=7
+eval: False
+onscreen_render: False
+ckpt_dir: ckpt-mb-ur10e-pc
+ckpt_freq: 1000
+policy_class: ACT
+# task_name: yaml_policy       # Already in the generate dataset section
+batch_size: 2
+seed: 0
+num_epochs: 20
+lr: 1.e-5
+kl_weight: 10
+chunk_size: 100
+hidden_dim: 512
+dim_feedforward: 3200
+temporal_agg: False
+state_dim: 8
+force_torque: False
+resume: False

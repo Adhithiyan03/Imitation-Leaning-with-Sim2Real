@@ -1,0 +1,67 @@
+<mujoco>
+    <option tolerance="1e-8"/>
+
+    <include file="scene.xml"/>
+    <include file="vx300s_dependencies.xml"/>
+
+    <equality>
+        <!--        <weld body1="mocap_left" body2="vx300s_left/gripper_link" solref="0.01 1" solimp=".0 .0 0.001"/>-->
+        <!--        <weld body1="mocap_left" body2="left_gripper_center_body" solref="0.01 1" solimp=".0 .0 0.001"/>-->
+        <weld body1="mocap_left" body2="left_gripper_center_body"/>
+        <weld body1="mocap_right" body2="right_gripper_center_body"/>
+
+    </equality>
+
+
+    <worldbody>
+        <include file="vx300s_left_2ee.xml"/>
+        <include file="vx300s_right_2ee.xml"/>
+
+
+        <!--        <body mocap="true" name="mocap_left" pos="-0.039706 0.5 0.42705">-->
+        <body mocap="true" name="mocap_left" pos="0.110294 0.5      0.42705">
+            <site pos="0 0 0.05" size="0.003 0.003 0.05" type="box" name="mocap_left_site1" rgba="1 0 0 1"/>
+            <site pos="0 0.05 0" size="0.003 0.05 0.003" type="box" name="mocap_left_site2" rgba="0 1 0 1"/>
+            <site pos="0.05 0 0" size="0.05 0.003 0.003" type="box" name="mocap_left_site3" rgba="0 0 1 1"/>
+        </body>
+
+
+        <body mocap="true" name="mocap_right" pos="-0.110294 0.5      0.42705">
+            <site pos="0 0 0.05" size="0.003 0.003 0.05" type="box" name="mocap_right_site1" rgba="1 0 0 1"/>
+            <site pos="0 0.05 0" size="0.003 0.05 0.003" type="box" name="mocap_right_site2" rgba="0 1 0 1"/>
+            <site pos="-0.05 0 0" size="0.05 0.003 0.003" type="box" name="mocap_right_site3" rgba="0 0 1 1"/>
+        </body>
+
+        <body name="tape" pos="0 0.5 0.0">
+            <geom type="box" size="0.15 0.0075 0.00001" contype="0" conaffinity="0" rgba="1 1 1 0.8"/>
+        </body>
+
+        <body name="start_box" pos="-0.1 0.45 0.0">
+            <geom type="box" size="0.05 0.05 0.0001" name="start_box" rgba="1 1 1 0.1"/>
+        </body>
+
+        <body name="end_box" pos="0.1 0.55 0.0">
+            <geom type="box" size="0.05 0.05 0.0001" name='end_box' rgba="1 1 1 0.1"/>
+        </body>
+    </worldbody>
+
+    <actuator>
+        <position ctrllimited="true" ctrlrange="0.021 0.057" joint="vx300s_left/left_finger" kp="200" user="1"/>
+        <position ctrllimited="true" ctrlrange="-0.057 -0.021" joint="vx300s_left/right_finger" kp="200" user="1"/>
+
+        <position ctrllimited="true" ctrlrange="0.021 0.057" joint="vx300s_right/left_finger" kp="200" user="1"/>
+        <position ctrllimited="true" ctrlrange="-0.057 -0.021" joint="vx300s_right/right_finger" kp="200" user="1"/>
+
+    </actuator>
+
+    <keyframe>
+        <!--        <key qpos="0 -0.68 0.388 0 1.61 0 0.024 -0.024  0 -0.96 1.16 0 -0.3 0 0.024 -0.024"-->
+        <key qpos="0 -0.96 1.16 0 -0.3 0 0.024 -0.024  0 -0.96 1.16 0 -0.3 0 0.024 -0.024"
+             ctrl="0.01844 -0.01844 0.01844 -0.01844"
+             mpos="-0.16793819  0.5         0.31022585     0.16793819 0.49999779 0.31022585"
+             mquat="1 0 0 0 1 0 0 0"
+        />
+    </keyframe>
+
+
+</mujoco>
